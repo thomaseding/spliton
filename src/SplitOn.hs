@@ -61,7 +61,8 @@ parseArgs' opts args = case args of
     "-s" : delim : args' -> parseArgs' opts{ oSplitDelim = Just $ decode delim } args'
     "--split" : delim : args' -> parseArgs' opts{ oSplitDelim = Just $ decode delim } args'
     "-j" : delim : args' -> parseArgs' opts{ oJoinDelim = Just $ decode delim } args'
-    "--join" : delim : args' -> parseArgs' opts{ oJoinDelim = Just $decode delim } args'
+    "--join" : delim : args' -> parseArgs' opts{ oJoinDelim = Just $ decode delim } args'
+    _ -> opts{ oHelp = True }
 
 
 decode :: String -> String
@@ -81,19 +82,6 @@ unescape c = case c of
     '\\' -> '\\'
     '\'' -> '\''
     '"' -> '"'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    _ -> '?'
 
 
